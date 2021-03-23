@@ -2,6 +2,7 @@ import './ListeDossiers.scss';
 import Dossier from './Dossier';
 import { firestore } from '../firebase';
 import { useEffect, useState } from 'react';
+import { colors } from '@material-ui/core';
 
 export default function ListeDossiers({utilisateur, etatDossiers}) {
   // État des dossiers (notez que cet état est défini dans le composant parent "Appli", et passé ici dans les props)
@@ -33,6 +34,12 @@ export default function ListeDossiers({utilisateur, etatDossiers}) {
 
   return (
     <ul className="ListeDossiers">
+     {!dossiers.length &&
+        <div className="NonSignets" style={{backgroundColor: '#008b8b', color : "white", padding : "100px 30px"}}>
+          <p>Votre liste de dossiers est vide</p>
+          <h1 style={{textAlign: "center", fontSize : "40px"}} >;-(</h1>
+        </div>
+        }
       {
         dossiers.map( 
           dossier =>  <li key={dossier.id}><Dossier {...dossier} /></li>
